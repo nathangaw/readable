@@ -1,0 +1,26 @@
+.view-title {
+  text-align: center;
+}
+
+.home-wrapper {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.category-list {
+  flex-basis: 50%;
+}
+
+.post-list {
+  flex-basis: 50%;
+}
+
+ul {
+  padding-left: 0px;
+}
+
+li {
+  list-style: none;
+
+}
