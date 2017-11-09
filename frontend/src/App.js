@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import './App.css'
-import DefaultView from './components/default'
+import CategoryList from './components/CategoryList'
+import PostList from './components/PostList'
+import Header from './components/Header'
+import AddPost from './components/AddPost'
+
 
 
 
@@ -8,7 +12,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <DefaultView />
+        <Header />
+        <AddPost />
+        <CategoryList />
+        <PostList />
 
       </div>
     );

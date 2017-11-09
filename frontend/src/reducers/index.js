@@ -28,10 +28,20 @@ export function categories(state = [], action) {
     }
 }
 
+export function posts(state = [], action) {
+    switch (action.type) {
+        case 'POSTS_FETCH_DATA_SUCCESS':
+            return action.items;
+        default:
+            return state;
+    }
+}
+
 
 
 export default combineReducers({
   categories,
+  posts,
   itemsHasErrored,
   itemsIsLoading
 });
