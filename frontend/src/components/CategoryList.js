@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { itemsFetchCategories } from '../actions/index'
+import { filterPosts } from '../actions/index'
 
 class CategoryList extends Component {
 
@@ -23,13 +24,17 @@ class CategoryList extends Component {
 
       <div className="category-list">
         <h2>Categories</h2>
+        { (this.props.filteredPostsList != false)
+          ? <button onClick={ () => this.props.filteredPosts(false) }>Show all categories</button>
+          : <div></div>
+        }
         <ul>
           {this.props.categories.map( category => (
-            <a key={category.name} href={category.path}><li>{category.name}</li></a>
+            <li onClick={ () => this.props.filteredPosts(category.name) } key={category.name}>{category.name}</li>
           ))}
         </ul>
       </div>
-            
+
     )
   }
 
@@ -39,13 +44,15 @@ const mapStateToProps = (state) => {
   return {
       categories: state.categories,
       hasErrored: state.itemsHasErrored,
-      isLoading: state.itemsIsLoading
+      isLoading: state.itemsIsLoading,
+      filteredPostsList: state.filteredPosts
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchData: () => dispatch(itemsFetchCategories())
+      fetchData: () => dispatch(itemsFetchCategories()),
+      filteredPosts: (category) => dispatch(filterPosts(category))
   };
 };
 

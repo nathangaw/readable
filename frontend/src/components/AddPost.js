@@ -7,8 +7,7 @@ class AddPost extends Component {
 
     return (
       <div>
-        <input></input>
-        <p>Add post</p>
+        <button>Add new post</button>
 
       </div>
 

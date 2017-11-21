@@ -2,6 +2,9 @@ export const ITEMS_HAS_ERRORED = 'ITEMS_HAS_ERRORED'
 export const ITEMS_IS_LOADING = 'ITEMS_IS_LOADING'
 export const CATEGORIES_FETCH_DATA_SUCCESS = 'CATEGORIES_FETCH_DATA_SUCCESS'
 export const POSTS_FETCH_DATA_SUCCESS = 'POSTS_FETCH_DATA_SUCCESS'
+export const ORDER_BY_VOTESCORE = 'ORDER_BY_VOTESCORE'
+export const ORDER_BY_DATE = 'ORDER_BY_DATE'
+export const FILTER_POSTS = 'FILTER_POSTS'
 
 
 
@@ -28,6 +31,27 @@ export function postsFetchDataSuccess(items) {
         type: 'POSTS_FETCH_DATA_SUCCESS',
         items
     };
+}
+
+export function orderByVoteScore(direction) {
+  return {
+    type: 'ORDER_BY_VOTESCORE',
+    direction
+  };
+}
+
+export function orderByDate(direction) {
+  return {
+    type: 'ORDER_BY_DATE',
+    direction
+  };
+}
+
+export function filterPosts(category) {
+  return {
+    type: 'FILTER_POSTS',
+    category
+  };
 }
 
 

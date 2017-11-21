@@ -14,6 +14,28 @@ const defaultData = {
     deleted: false,
     commentCount: 2
   },
+  "aascaciyjabvozdd253nd": {
+    id: 'aascaciyjabvozdd253nd',
+    timestamp: 1466166872634,
+    title: 'Udacity is the best place to learn React',
+    body: 'Everyone says so after all.',
+    author: 'thingtwo',
+    category: 'react',
+    voteScore: 2,
+    deleted: false,
+    commentCount: 2
+  },
+  "aascaciyjabvozdd253": {
+    id: 'aascaciyjabvozdd253',
+    timestamp: 1466166872624,
+    title: 'Udacity is the best place to learn React',
+    body: 'Everyone says so after all.',
+    author: 'thingtwo',
+    category: 'react',
+    voteScore: 16,
+    deleted: false,
+    commentCount: 2
+  },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
     timestamp: 1468479767190,
@@ -21,7 +43,7 @@ const defaultData = {
     body: 'Just kidding. It takes more than 10 minutes to learn technology.',
     author: 'thingone',
     category: 'redux',
-    voteScore: -5,
+    voteScore: 8,
     deleted: false,
     commentCount: 0
   }

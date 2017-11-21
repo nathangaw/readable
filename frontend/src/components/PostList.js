@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { itemsFetchPosts } from '../actions/index'
+import { orderByVoteScore } from '../actions/index'
+import { orderByDate } from '../actions/index'
+import moment from "moment"
 
 class PostList extends Component {
 
 
 
   componentDidMount() {
-    this.props.fetchData()
+    this.props.fetchData();
   }
 
   render() {
@@ -22,10 +25,17 @@ class PostList extends Component {
     return (
       <div className="post-list">
         <h2>Posts</h2>
+        <p onClick={ () => this.props.votescoreSort('descend') }>Sort by descending votescore</p>
+        <p onClick={ () => this.props.votescoreSort('ascend') }>Sort by ascending votescore</p>
+        <p onClick={ () => this.props.dateSort('descend') }>Sort by descending date</p>
+        <p onClick={ () => this.props.dateSort('ascend') }>Sort by ascending date</p>
         <ul>
-          {this.props.posts.map( post => (
-            <a key={post.id}><li>{post.title} | {post.timestamp} | {post.voteScore}</li></a>
-          ))}
+          { (this.props.filteredPosts.length)
+            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<li key={post.id}>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li>))
+            : this.props.posts.map( post => (
+            <li key={post.id}>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li>))
+          }
+
         </ul>
       </div>
     )
@@ -37,13 +47,17 @@ const mapStateToProps = (state) => {
   return {
       posts: state.posts,
       hasErrored: state.itemsHasErrored,
-      isLoading: state.itemsIsLoading
+      isLoading: state.itemsIsLoading,
+      filteredPosts: state.filteredPosts
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      fetchData: () => dispatch(itemsFetchPosts())
+      fetchData: () => dispatch(itemsFetchPosts()),
+      votescoreSort: (direction) => dispatch(orderByVoteScore(direction)),
+      dateSort: (direction) => dispatch(orderByDate(direction))
+
   };
 };
 
