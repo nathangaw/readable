@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { routerReducer } from 'react-router-redux'
 /* import { ITEMS_HAS_ERRORED, ITEMS_IS_LOADING, ITEMS_FETCH_DATA_SUCCESS } from '../actions/index'; */
 
 export function itemsHasErrored(state = false, action) {
@@ -79,5 +80,6 @@ export default combineReducers({
   posts,
   itemsHasErrored,
   itemsIsLoading,
-  filteredPosts
+  filteredPosts,
+  router: routerReducer
 });
