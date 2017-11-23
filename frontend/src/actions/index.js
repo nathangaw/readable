@@ -6,6 +6,7 @@ export const ORDER_BY_VOTESCORE = 'ORDER_BY_VOTESCORE'
 export const ORDER_BY_DATE = 'ORDER_BY_DATE'
 export const FILTER_POSTS = 'FILTER_POSTS'
 export const SET_ACTIVE_POST = 'SET_ACTIVE_POST'
+export const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS'
 
 
 export function itemsHasErrored(bool) {
@@ -61,6 +62,13 @@ export function setActivePost(post) {
   }
 }
 
+export function commentsFetchDataSuccess(items) {
+  return {
+    type: 'COMMENTS_FETCH_DATA_SUCCESS',
+    items
+  }
+}
+
 
 /* thunk function */
 const api = 'http://localhost:3001'
@@ -100,6 +108,23 @@ export function itemsFetchPosts() {
             })
             .then((response) => response.json())
             .then((items) => dispatch(postsFetchDataSuccess(items)))
+            .catch(() => dispatch(itemsHasErrored(true)));
+    };
+}
+
+export function itemsFetchComments(id) {
+    return (dispatch) => {
+        dispatch(itemsIsLoading(true));
+        fetch(`${api}/posts/${id}/comments`, { headers })
+            .then((response) => {
+                if (!response.ok) {
+                  throw Error(response.statusText);
+                }
+                dispatch(itemsIsLoading(false));
+                return response;
+            })
+            .then((response) => response.json())
+            .then((items) => dispatch(commentsFetchDataSuccess(items)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

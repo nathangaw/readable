@@ -33,7 +33,7 @@ class PostList extends Component {
         <p onClick={ () => this.props.dateSort('ascend') }>Sort by ascending date</p>
         <ul>
           { (this.props.filteredPosts.length)
-            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
+            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} onClick={() => this.props.setActivePost({post}) } key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
             : this.props.posts.map( post => (
             <Link to={"/post/" + post.id} onClick={() => this.props.setActivePost({post}) } key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
           }

@@ -80,6 +80,15 @@ export function activePosts(state = null, action) {
     }
 }
 
+export function activeComments(state = [], action) {
+    switch (action.type) {
+        case 'COMMENTS_FETCH_DATA_SUCCESS':
+            console.log(action.items);
+            return action.items;
+        default:
+            return state;
+    }
+}
 
 
 export default combineReducers({
@@ -89,5 +98,6 @@ export default combineReducers({
   itemsIsLoading,
   filteredPosts,
   activePosts,
+  activeComments,
   router: routerReducer
 });
