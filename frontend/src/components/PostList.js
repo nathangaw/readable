@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { itemsFetchPosts } from '../actions/index'
 import { orderByVoteScore } from '../actions/index'
+import { setActivePost } from '../actions/index'
 import { orderByDate } from '../actions/index'
 import moment from "moment"
 import { Link } from 'react-router-dom'
@@ -34,7 +35,7 @@ class PostList extends Component {
           { (this.props.filteredPosts.length)
             ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
             : this.props.posts.map( post => (
-            <Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
+            <Link to={"/post/" + post.id} onClick={() => this.props.setActivePost({post}) } key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
           }
 
         </ul>
@@ -57,7 +58,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
       fetchData: () => dispatch(itemsFetchPosts()),
       votescoreSort: (direction) => dispatch(orderByVoteScore(direction)),
-      dateSort: (direction) => dispatch(orderByDate(direction))
+      dateSort: (direction) => dispatch(orderByDate(direction)),
+      setActivePost: (post) => dispatch(setActivePost(post))
 
   };
 };

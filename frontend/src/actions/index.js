@@ -5,7 +5,7 @@ export const POSTS_FETCH_DATA_SUCCESS = 'POSTS_FETCH_DATA_SUCCESS'
 export const ORDER_BY_VOTESCORE = 'ORDER_BY_VOTESCORE'
 export const ORDER_BY_DATE = 'ORDER_BY_DATE'
 export const FILTER_POSTS = 'FILTER_POSTS'
-
+export const SET_ACTIVE_POST = 'SET_ACTIVE_POST'
 
 
 export function itemsHasErrored(bool) {
@@ -52,6 +52,13 @@ export function filterPosts(category) {
     type: 'FILTER_POSTS',
     category
   };
+}
+
+export function setActivePost(post) {
+  return {
+    type: 'SET_ACTIVE_POST',
+    post
+  }
 }
 
 

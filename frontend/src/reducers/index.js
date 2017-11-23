@@ -56,8 +56,6 @@ export function posts(state = [], action) {
                 return parseFloat(a.timestamp) - parseFloat(b.timestamp);
               });
             }
-        /*case 'FILTER_POSTS':
-            return state.slice().filter( post => post.category === action.category );*/
 
         default:
             return state;
@@ -73,6 +71,15 @@ export function filteredPosts(state = false, action) {
     }
 }
 
+export function activePosts(state = null, action) {
+    switch (action.type) {
+        case 'SET_ACTIVE_POST':
+            return action.post;
+        default:
+            return state;
+    }
+}
+
 
 
 export default combineReducers({
@@ -81,5 +88,6 @@ export default combineReducers({
   itemsHasErrored,
   itemsIsLoading,
   filteredPosts,
+  activePosts,
   router: routerReducer
 });
