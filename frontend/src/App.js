@@ -4,6 +4,7 @@ import CategoryList from './components/CategoryList'
 import PostList from './components/PostList'
 import Header from './components/Header'
 import AddPost from './components/AddPost'
+import Post from './components/Post'
 
 
 

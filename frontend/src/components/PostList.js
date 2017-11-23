@@ -4,6 +4,7 @@ import { itemsFetchPosts } from '../actions/index'
 import { orderByVoteScore } from '../actions/index'
 import { orderByDate } from '../actions/index'
 import moment from "moment"
+import { Link } from 'react-router-dom'
 
 class PostList extends Component {
 
@@ -31,9 +32,9 @@ class PostList extends Component {
         <p onClick={ () => this.props.dateSort('ascend') }>Sort by ascending date</p>
         <ul>
           { (this.props.filteredPosts.length)
-            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<li key={post.id}>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li>))
+            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
             : this.props.posts.map( post => (
-            <li key={post.id}>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li>))
+            <Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
           }
 
         </ul>
