@@ -56,6 +56,20 @@ export function posts(state = [], action) {
                 return parseFloat(a.timestamp) - parseFloat(b.timestamp);
               });
             }
+        case 'UPDATE_POST_SCORE':
+            if (action.direction === 'upVote') {
+
+              // TODO: find post object in state with id that matches action.id and add 1 to voteScore
+
+
+
+            } else {
+              console.log(action.direction)
+
+              // TODO: find post object in state with id that matches action.id and subtract 1 from voteScore
+
+
+            }
 
         default:
             return state;
@@ -75,6 +89,9 @@ export function activePosts(state = null, action) {
     switch (action.type) {
         case 'SET_ACTIVE_POST':
             return action.post;
+
+
+
         default:
             return state;
     }

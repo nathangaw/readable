@@ -7,6 +7,7 @@ export const ORDER_BY_DATE = 'ORDER_BY_DATE'
 export const FILTER_POSTS = 'FILTER_POSTS'
 export const SET_ACTIVE_POST = 'SET_ACTIVE_POST'
 export const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS'
+export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE'
 
 
 export function itemsHasErrored(bool) {
@@ -69,12 +70,21 @@ export function commentsFetchDataSuccess(items) {
   }
 }
 
+export function updatePostScore(direction, id) {
+  return {
+    type: 'UPDATE_POST_SCORE',
+    direction,
+    id
+  }
+}
+
 
 /* thunk function */
 const api = 'http://localhost:3001'
 
 const headers = {
-  'Authorization': 'letmein'
+  'Authorization': 'letmein',
+  'Content-Type': 'application/json'
 }
 
 export function itemsFetchCategories() {
@@ -126,5 +136,16 @@ export function itemsFetchComments(id) {
             .then((response) => response.json())
             .then((items) => dispatch(commentsFetchDataSuccess(items)))
             .catch(() => dispatch(itemsHasErrored(true)));
+    };
+}
+
+export function changePostScore(direction, id) {
+    return (dispatch) => {
+        fetch(`${api}/posts/${id}`, {
+          headers,
+          method: 'POST',
+          body: JSON.stringify({ option: direction })
+        })
+        .then(() => dispatch(updatePostScore(direction, id)))
     };
 }
