@@ -12,8 +12,6 @@ class Post extends Component {
     this.props.fetchComments(this.props.activePost);
   }
 
-
-
   render() {
 
 

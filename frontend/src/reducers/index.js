@@ -57,19 +57,18 @@ export function posts(state = [], action) {
               });
             }
         case 'UPDATE_POST_SCORE':
-            if (action.direction === 'upVote') {
-
-              // TODO: find post object in state with id that matches action.id and add 1 to voteScore
-
-
-
-            } else {
-              console.log(action.direction)
-
-              // TODO: find post object in state with id that matches action.id and subtract 1 from voteScore
-
-
+          return state.map(post => {
+            if (post.id === action.id) {
+              if (action.direction === "upVote") {
+                post.voteScore += 1
+              }
+              if (action.direction === "downVote") {
+                post.voteScore -= 1
+              }
             }
+          return post
+          })
+
 
         default:
             return state;
