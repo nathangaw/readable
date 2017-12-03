@@ -56,12 +56,14 @@ export function filterPosts(category) {
   };
 }
 
+/*
 export function setActivePost(post) {
   return {
     type: 'SET_ACTIVE_POST',
     post
   }
 }
+*/
 
 export function commentsFetchDataSuccess(items) {
   return {

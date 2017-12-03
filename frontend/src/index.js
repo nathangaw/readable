@@ -12,6 +12,7 @@ import rootReducer from './reducers/index'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
 import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import persistState from 'redux-localstorage'
 
 const history = createHistory()
 

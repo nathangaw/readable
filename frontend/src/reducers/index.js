@@ -84,6 +84,7 @@ export function filteredPosts(state = false, action) {
     }
 }
 
+/*
 export function activePosts(state = null, action) {
     switch (action.type) {
         case 'SET_ACTIVE_POST':
@@ -95,12 +96,15 @@ export function activePosts(state = null, action) {
             return state;
     }
 }
+*/
 
 export function activeComments(state = [], action) {
     switch (action.type) {
         case 'COMMENTS_FETCH_DATA_SUCCESS':
             console.log(action.items);
-            return action.items;
+            return action.items.slice().sort(function(a, b) {
+                return parseFloat(b.voteScore) - parseFloat(a.voteScore);
+              })
         default:
             return state;
     }
@@ -113,7 +117,6 @@ export default combineReducers({
   itemsHasErrored,
   itemsIsLoading,
   filteredPosts,
-  activePosts,
   activeComments,
   router: routerReducer
 });

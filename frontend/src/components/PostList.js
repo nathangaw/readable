@@ -35,7 +35,7 @@ class PostList extends Component {
           { (this.props.filteredPosts.length)
             ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} onClick={() => this.props.setActivePost(post.id) } key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
             : this.props.posts.map( post => (
-            <Link to={"/post/" + post.id} onClick={() => this.props.setActivePost(post.id) } key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
+            <Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
           }
 
         </ul>
@@ -59,7 +59,7 @@ const mapDispatchToProps = (dispatch) => {
       fetchData: () => dispatch(itemsFetchPosts()),
       votescoreSort: (direction) => dispatch(orderByVoteScore(direction)),
       dateSort: (direction) => dispatch(orderByDate(direction)),
-      setActivePost: (post) => dispatch(setActivePost(post))
+     // setActivePost: (post) => dispatch(setActivePost(post))
 
   };
 };
