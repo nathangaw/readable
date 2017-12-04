@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { itemsFetchComments } from '../actions/index'
 import { changePostScore } from '../actions/index'
+import { addNewComment } from '../actions/index'
 import moment from "moment"
+import Modal from 'react-modal'
 
 class Post extends Component {
 
@@ -12,13 +14,52 @@ class Post extends Component {
     this.props.fetchComments(this.props.activePost);
   }
 
+  state = {
+    commentModalOpen: false,
+    commentInput: "",
+    nameInput: ""
+  }
+
+  openCommentModal = () => {
+    this.setState(() => ({
+      commentModalOpen: true
+    })
+    )
+  }
+
+  closeCommentModal = () => {
+    this.setState(() => ({
+      commentModalOpen: false
+    })
+    )
+  }
+
+  commentInput = (event) => {
+    this.setState({commentInput: event.target.value})
+  }
+
+  nameInput = (event) => {
+    this.setState({nameInput: event.target.value})
+  }
+
+  commentSubmit = (event) => {
+    console.log(this.state.commentInput);
+    console.log(this.state.nameInput);
+    
+    this.props.addComment(Math.floor(Math.random() * 1000000000), this.state.commentInput, this.state.nameInput, this.props.activePost)
+    event.preventDefault();
+    this.closeCommentModal();
+    alert('Thanks for your comment');
+  }
+
   render() {
 
 
     return (
 
       <div className="post">
-        <button>Edit post</button><button>Delete post</button>
+        <button>Edit post</button>
+        <button>Delete post</button>
         <h1>{this.props.posts[0].title}</h1>
         <h2>{this.props.url}</h2>
         <p>Votescore: {this.props.posts[0].voteScore}</p>
@@ -28,10 +69,32 @@ class Post extends Component {
         <p>{this.props.posts[0].body}</p>
 
         <h4>Comments</h4>
-        <button>Add new comment</button>
+        <button onClick={ () => this.openCommentModal() }>Add new comment</button>
         <p>Number of comments: {this.props.posts[0].commentCount}</p>
-        { this.props.activeComments.map( (comment) => (<p key={comment.id}>{comment.author}{comment.body}{comment.voteScore}</p>) ) }
+        { this.props.activeComments.map( (comment) => (<div><p key={comment.id}>{comment.author}{comment.body}{comment.voteScore}</p><button>Vote up</button><button>Vote down</button><button>Edit</button><button>Delete</button></div>) ) }
 
+
+        <Modal
+          isOpen={this.state.commentModalOpen}
+          // onRequestClose={this.closeCommentModal}
+          contentLabel="Modal"
+        >
+          <button onClick={ () => this.closeCommentModal()}>Close Modal</button>
+          <h1>Add a comment</h1>
+
+          <form onSubmit={this.commentSubmit}>
+            <label>
+              Your comment:
+              <input type="text" value={this.state.commentInput} onChange={this.commentInput}></input>
+            </label>
+            <label>
+              Your name:
+              <input type="text" placeholder="Your name" value={this.state.nameInput} onChange={this.nameInput}></input>
+            </label>
+        
+          <input type="submit" value="Submit" />
+          </form>
+        </Modal>
 
       </div>
 
@@ -55,7 +118,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchComments: (id) => dispatch(itemsFetchComments(id)),
-    changePostScore: (direction, id) => dispatch(changePostScore(direction, id))
+    changePostScore: (direction, id) => dispatch(changePostScore(direction, id)),
+    addComment: (commentId, body, author, parentId) => dispatch(addNewComment(commentId, body, author, parentId))
   };
 };
 

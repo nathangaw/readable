@@ -8,6 +8,8 @@ export const FILTER_POSTS = 'FILTER_POSTS'
 export const SET_ACTIVE_POST = 'SET_ACTIVE_POST'
 export const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS'
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE'
+export const ADD_COMMENT = 'ADD_COMMENT'
+
 
 
 export function itemsHasErrored(bool) {
@@ -80,6 +82,13 @@ export function updatePostScore(direction, id) {
   }
 }
 
+export function addComment(comment) {
+    return {
+      type: 'ADD_COMMENT',
+      comment
+    }
+  }
+
 
 /* thunk function */
 const api = 'http://localhost:3001'
@@ -150,4 +159,31 @@ export function changePostScore(direction, id) {
         })
         .then(() => dispatch(updatePostScore(direction, id)))
     };
+}
+
+export function addNewComment(commentId, body, author, parentId) {
+    return (dispatch) => {
+        fetch(`${api}/comments`, {
+          headers,
+          method: 'POST',
+          body: JSON.stringify({ 
+            id: commentId.toString(),
+            timeStamp: Date.now(),
+            body: body,
+            author: author,
+            parentId: parentId
+         })
+        })
+        .then(() => dispatch(addComment([{
+            id: commentId.toString(),
+            parentId: parentId,
+            timestamp: Date.now(),
+            body: body,
+            author: author,
+            voteScore: 1,
+            deleted: false,
+            parentDeleted: false
+        }]
+        )))
+    }
 }

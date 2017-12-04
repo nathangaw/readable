@@ -105,6 +105,10 @@ export function activeComments(state = [], action) {
             return action.items.slice().sort(function(a, b) {
                 return parseFloat(b.voteScore) - parseFloat(a.voteScore);
               })
+
+        case 'ADD_COMMENT':
+            return [...state, ...action.comment];
+
         default:
             return state;
     }
