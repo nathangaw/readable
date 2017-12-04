@@ -109,6 +109,20 @@ export function activeComments(state = [], action) {
         case 'ADD_COMMENT':
             return [...state, ...action.comment];
 
+        case 'UPDATE_COMMENT_SCORE':
+            return state.map(comment => {
+                if (comment.id === action.id) {
+                    if (action.direction === "upVote") {
+                        comment.voteScore += 1
+                    }
+                    if (action.direction === "downVote") {
+                        comment.voteScore -= 1
+                    }
+                }
+                return comment
+            })
+              
+
         default:
             return state;
     }

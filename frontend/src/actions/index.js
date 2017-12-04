@@ -9,6 +9,7 @@ export const SET_ACTIVE_POST = 'SET_ACTIVE_POST'
 export const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS'
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE'
 export const ADD_COMMENT = 'ADD_COMMENT'
+export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE'
 
 
 
@@ -81,6 +82,14 @@ export function updatePostScore(direction, id) {
     id
   }
 }
+
+export function updateCommentScore(direction, id) {
+    return {
+      type: 'UPDATE_COMMENT_SCORE',
+      direction,
+      id
+    }
+  }
 
 export function addComment(comment) {
     return {
@@ -186,4 +195,15 @@ export function addNewComment(commentId, body, author, parentId) {
         }]
         )))
     }
+}
+
+export function changeCommentScore(direction, id) {
+    return (dispatch) => {
+        fetch(`${api}/comments/${id}`, {
+          headers,
+          method: 'POST',
+          body: JSON.stringify({ option: direction })
+        })
+        .then(() => dispatch(updateCommentScore(direction, id)))
+    };
 }

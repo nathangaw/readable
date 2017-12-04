@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { itemsFetchComments } from '../actions/index'
 import { changePostScore } from '../actions/index'
 import { addNewComment } from '../actions/index'
+import { changeCommentScore } from '../actions/index'
 import moment from "moment"
 import Modal from 'react-modal'
 
@@ -71,7 +72,7 @@ class Post extends Component {
         <h4>Comments</h4>
         <button onClick={ () => this.openCommentModal() }>Add new comment</button>
         <p>Number of comments: {this.props.posts[0].commentCount}</p>
-        { this.props.activeComments.map( (comment) => (<div><p key={comment.id}>{comment.author}{comment.body}{comment.voteScore}</p><button>Vote up</button><button>Vote down</button><button>Edit</button><button>Delete</button></div>) ) }
+        { this.props.activeComments.map( (comment) => (<div><p key={comment.id}>{comment.author}{comment.body}{comment.voteScore}</p><button onClick={ () => (this.props.changeCommentScore('upVote', comment.id)) }>Vote up</button><button onClick={ () => (this.props.changeCommentScore('downVote', comment.id)) }>Vote down</button><button>Edit</button><button>Delete</button></div>) ) }
 
 
         <Modal
@@ -119,6 +120,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchComments: (id) => dispatch(itemsFetchComments(id)),
     changePostScore: (direction, id) => dispatch(changePostScore(direction, id)),
+    changeCommentScore: (direction, id) => dispatch(changeCommentScore(direction, id)),
     addComment: (commentId, body, author, parentId) => dispatch(addNewComment(commentId, body, author, parentId))
   };
 };
