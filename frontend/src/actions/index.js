@@ -11,6 +11,7 @@ export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 
 
 
@@ -104,6 +105,13 @@ export function updateComment(commentId, body) {
       type: 'UPDATE_COMMENT',
       commentId,
       body
+    }
+}
+
+export function deleteComment(commentId) {
+    return {
+      type: 'DELETE_COMMENT',
+      commentId
     }
 }
 
@@ -230,5 +238,15 @@ export function changeCommentScore(direction, id) {
           body: JSON.stringify({ option: direction })
         })
         .then(() => dispatch(updateCommentScore(direction, id)))
+    };
+}
+
+export function deleteExistingComment(commentId) {
+    return (dispatch) => {
+        fetch(`${api}/comments/${commentId}`, {
+          headers,
+          method: 'DELETE',
+        })
+        .then(() => dispatch(deleteComment(commentId)))
     };
 }

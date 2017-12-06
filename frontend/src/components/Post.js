@@ -5,12 +5,11 @@ import { changePostScore } from '../actions/index'
 import { addNewComment } from '../actions/index'
 import { changeCommentScore } from '../actions/index'
 import { updateExistingComment } from '../actions/index'
+import { deleteExistingComment } from '../actions/index'
 import moment from "moment"
 import Modal from 'react-modal'
 
 class Post extends Component {
-
-// TODO: if this.props.activePost is null, retrieve post id from URL and set activePost value
 
   componentDidMount() {
     this.props.fetchComments(this.props.activePost);
@@ -88,14 +87,14 @@ class Post extends Component {
 
         <h4>Comments</h4>
         <button onClick={ () => this.openCommentModal() }>Add new comment</button>
-        <p>Number of comments: {this.props.posts[0].commentCount}</p>
+        <p>Number of comments: {this.props.activeComments.length}</p>
         { this.props.activeComments.map( (comment) => (
           <div key={comment.id}>
             <p>{comment.author}{comment.body}{comment.voteScore}</p>
             <button onClick={ () => (this.props.changeCommentScore('upVote', comment.id)) }>Vote up</button>
             <button onClick={ () => (this.props.changeCommentScore('downVote', comment.id)) }>Vote down</button>
             <button onClick={ () => this.enterCommentEdit(comment.id, comment.body, comment.author)}>Edit</button>
-            <button>Delete</button>
+            <button onClick={ () => this.props.deleteComment(comment.id)}>Delete</button>
           </div>
         ) ) }
 
@@ -169,7 +168,8 @@ const mapDispatchToProps = (dispatch) => {
     changePostScore: (direction, id) => dispatch(changePostScore(direction, id)),
     changeCommentScore: (direction, id) => dispatch(changeCommentScore(direction, id)),
     addComment: (commentId, body, author, parentId) => dispatch(addNewComment(commentId, body, author, parentId)),
-    updateComment: (commentId, body) => dispatch(updateExistingComment(commentId, body))
+    updateComment: (commentId, body) => dispatch(updateExistingComment(commentId, body)),
+    deleteComment: (commentId) => dispatch(deleteExistingComment(commentId))
   };
 };
 

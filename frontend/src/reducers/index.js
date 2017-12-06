@@ -123,14 +123,16 @@ export function activeComments(state = [], action) {
             })
         
         case 'UPDATE_COMMENT':
-            console.log(action.commentId)
-            console.log(action.body)
             return state.map(comment => {
                 if (comment.id === action.commentId) {
                     comment.body = action.body
                 }
                 return comment
             })
+
+        case 'DELETE_COMMENT':
+            return state.filter(comment => comment.id != action.commentId)
+            
               
 
         default:
