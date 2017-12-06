@@ -10,6 +10,7 @@ export const COMMENTS_FETCH_DATA_SUCCESS = 'COMMENTS_FETCH_DATA_SUCCESS'
 export const UPDATE_POST_SCORE = 'UPDATE_POST_SCORE'
 export const ADD_COMMENT = 'ADD_COMMENT'
 export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE'
+export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 
 
 
@@ -96,7 +97,15 @@ export function addComment(comment) {
       type: 'ADD_COMMENT',
       comment
     }
-  }
+}
+
+export function updateComment(commentId, body) {
+    return {
+      type: 'UPDATE_COMMENT',
+      commentId,
+      body
+    }
+}
 
 
 /* thunk function */
@@ -194,6 +203,22 @@ export function addNewComment(commentId, body, author, parentId) {
             parentDeleted: false
         }]
         )))
+    }
+}
+
+export function updateExistingComment(commentId, body) {
+    console.log(commentId)
+    console.log(body)
+    return (dispatch) => {
+        fetch(`${api}/comments/${commentId}`, {
+          headers,
+          method: 'PUT',
+          body: JSON.stringify({ 
+            timestamp: Date.now(),
+            body: body
+         })
+        })
+        .then(() => dispatch(updateComment(commentId, body)))
     }
 }
 
