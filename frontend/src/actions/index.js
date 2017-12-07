@@ -12,6 +12,7 @@ export const ADD_COMMENT = 'ADD_COMMENT'
 export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+export const SINGLE_POST_FETCH_DATA_SUCCESS = 'SINGLE_POST_FETCH_DATA_SUCCESS'
 
 
 
@@ -37,6 +38,13 @@ export function postsFetchDataSuccess(items) {
     return {
         type: 'POSTS_FETCH_DATA_SUCCESS',
         items
+    };
+}
+
+export function singlePostFetchDataSuccess(item) {
+    return {
+        type: 'SINGLE_POST_FETCH_DATA_SUCCESS',
+        item
     };
 }
 
@@ -155,6 +163,23 @@ export function itemsFetchPosts() {
             })
             .then((response) => response.json())
             .then((items) => dispatch(postsFetchDataSuccess(items)))
+            .catch(() => dispatch(itemsHasErrored(true)));
+    };
+}
+
+export function itemsFetchSinglePost(id) {
+    return (dispatch) => {
+        dispatch(itemsIsLoading(true));
+        fetch(`${api}/posts/${id}`, { headers })
+            .then((response) => {
+                if (!response.ok) {
+                  throw Error(response.statusText);
+                }
+                dispatch(itemsIsLoading(false));
+                return response;
+            })
+            .then((response) => response.json())
+            .then((item) => dispatch(singlePostFetchDataSuccess(item)))
             .catch(() => dispatch(itemsHasErrored(true)));
     };
 }

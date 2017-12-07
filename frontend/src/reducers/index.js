@@ -84,11 +84,11 @@ export function filteredPosts(state = false, action) {
     }
 }
 
-/*
-export function activePosts(state = null, action) {
+
+export function activePost(state = {}, action) {
     switch (action.type) {
-        case 'SET_ACTIVE_POST':
-            return action.post;
+        case 'SINGLE_POST_FETCH_DATA_SUCCESS':
+            return action.item;
 
 
 
@@ -96,7 +96,7 @@ export function activePosts(state = null, action) {
             return state;
     }
 }
-*/
+
 
 export function activeComments(state = [], action) {
     switch (action.type) {
@@ -144,6 +144,7 @@ export function activeComments(state = [], action) {
 export default combineReducers({
   categories,
   posts,
+  activePost,
   itemsHasErrored,
   itemsIsLoading,
   filteredPosts,

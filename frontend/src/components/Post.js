@@ -6,13 +6,15 @@ import { addNewComment } from '../actions/index'
 import { changeCommentScore } from '../actions/index'
 import { updateExistingComment } from '../actions/index'
 import { deleteExistingComment } from '../actions/index'
+import { itemsFetchSinglePost} from '../actions/index'
 import moment from "moment"
 import Modal from 'react-modal'
 
 class Post extends Component {
 
   componentDidMount() {
-    this.props.fetchComments(this.props.activePost);
+    this.props.getPost(this.props.activePostId)
+    this.props.fetchComments(this.props.activePostId);
   }
 
   state = {
@@ -77,13 +79,13 @@ class Post extends Component {
       <div className="post">
         <button>Edit post</button>
         <button>Delete post</button>
-        <h1>{this.props.posts[0].title}</h1>
+        <h1>{this.props.activePost.title}</h1>
         <h2>{this.props.url}</h2>
-        <p>Votescore: {this.props.posts[0].voteScore}</p>
+        <p>Votescore: {this.props.activePost.voteScore}</p>
         <button onClick={ () => (this.props.changePostScore('upVote', this.props.activePost)) }>Increase score</button><button onClick={ () => (this.props.changePostScore('downVote', this.props.activePost)) }>Decrease score</button>
-        <p>By {this.props.posts[0].author}</p>
-        <p>{ moment(this.props.posts[0].timestamp).format('MMMM Do YYYY') }</p>
-        <p>{this.props.posts[0].body}</p>
+        <p>By {this.props.activePost.author}</p>
+        <p>{ moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</p>
+        <p>{this.props.activePost.body}</p>
 
         <h4>Comments</h4>
         <button onClick={ () => this.openCommentModal() }>Add new comment</button>
@@ -153,10 +155,9 @@ class Post extends Component {
 const mapStateToProps = (state) => {
   return {
     // need url to populate page if refreshed or accessed directly
-    activePost: state.router.location.pathname.slice(6),
-    // activePost: state.activePosts,
+    activePostId: state.router.location.pathname.slice(6),
     activeComments: state.activeComments,
-    posts: state.posts.filter( post => post.id == state.router.location.pathname.slice(6) )
+    activePost: state.activePost
 
     
   };
@@ -169,7 +170,8 @@ const mapDispatchToProps = (dispatch) => {
     changeCommentScore: (direction, id) => dispatch(changeCommentScore(direction, id)),
     addComment: (commentId, body, author, parentId) => dispatch(addNewComment(commentId, body, author, parentId)),
     updateComment: (commentId, body) => dispatch(updateExistingComment(commentId, body)),
-    deleteComment: (commentId) => dispatch(deleteExistingComment(commentId))
+    deleteComment: (commentId) => dispatch(deleteExistingComment(commentId)),
+    getPost: (id) => dispatch(itemsFetchSinglePost(id))
   };
 };
 
