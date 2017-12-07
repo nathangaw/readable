@@ -56,7 +56,7 @@ export function posts(state = [], action) {
                 return parseFloat(a.timestamp) - parseFloat(b.timestamp);
               });
             }
-        case 'UPDATE_POST_SCORE':
+        /*case 'UPDATE_POST_SCORE':
           return state.map(post => {
             if (post.id === action.id) {
               if (action.direction === "upVote") {
@@ -67,7 +67,7 @@ export function posts(state = [], action) {
               }
             }
           return post
-          })
+          })*/
 
 
         default:
@@ -88,7 +88,19 @@ export function filteredPosts(state = false, action) {
 export function activePost(state = {}, action) {
     switch (action.type) {
         case 'SINGLE_POST_FETCH_DATA_SUCCESS':
+            console.log(action.item)
             return action.item;
+
+        case 'UPDATE_POST_SCORE':
+
+            let currentScore = state.voteScore
+            if (action.direction === "upVote") {
+                currentScore += 1
+            } else {
+                currentScore -= 1
+            }
+
+            return { ...state, voteScore: currentScore}
 
 
 
@@ -101,7 +113,6 @@ export function activePost(state = {}, action) {
 export function activeComments(state = [], action) {
     switch (action.type) {
         case 'COMMENTS_FETCH_DATA_SUCCESS':
-            console.log(action.items);
             return action.items.slice().sort(function(a, b) {
                 return parseFloat(b.voteScore) - parseFloat(a.voteScore);
               })

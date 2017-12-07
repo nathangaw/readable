@@ -35,7 +35,9 @@ class Post extends Component {
   closeCommentModal = () => {
     this.setState(() => ({
       commentModalOpen: false,
-      inCommentEditMode: false
+      inCommentEditMode: false,
+      commentInput: "",
+      nameInput: ""
     })
     )
   }
@@ -82,7 +84,7 @@ class Post extends Component {
         <h1>{this.props.activePost.title}</h1>
         <h2>{this.props.url}</h2>
         <p>Votescore: {this.props.activePost.voteScore}</p>
-        <button onClick={ () => (this.props.changePostScore('upVote', this.props.activePost)) }>Increase score</button><button onClick={ () => (this.props.changePostScore('downVote', this.props.activePost)) }>Decrease score</button>
+        <button onClick={ () => (this.props.changePostScore('upVote', this.props.activePostId)) }>Increase score</button><button onClick={ () => (this.props.changePostScore('downVote', this.props.activePostId)) }>Decrease score</button>
         <p>By {this.props.activePost.author}</p>
         <p>{ moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</p>
         <p>{this.props.activePost.body}</p>
@@ -132,10 +134,6 @@ class Post extends Component {
               <label>
                 Your comment:
                 <input type="text" value={this.state.commentInput} onChange={this.commentInput}></input>
-              </label>
-              <label>
-                Your name:
-                <input type="text" placeholder="Your name" value={this.state.nameInput} onChange={this.nameInput}></input>
               </label>
               <input type="submit" value="Submit" />
           </form>
