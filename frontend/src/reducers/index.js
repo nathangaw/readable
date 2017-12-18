@@ -102,7 +102,12 @@ export function activePost(state = {}, action) {
 
             return { ...state, voteScore: currentScore}
 
+        case 'DELETE_POST':
+            return {};
 
+        case 'ADD_POST':
+            return action.post;
+            // TODO: redirect to newly created post
 
         default:
             return state;

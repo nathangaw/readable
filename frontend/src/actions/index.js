@@ -13,6 +13,8 @@ export const UPDATE_COMMENT_SCORE = 'UPDATE_COMMENT_SCORE'
 export const UPDATE_COMMENT = 'UPDATE_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const SINGLE_POST_FETCH_DATA_SUCCESS = 'SINGLE_POST_FETCH_DATA_SUCCESS'
+export const DELETE_POST = 'DELETE_POST'
+export const ADD_POST = 'ADD_POST'
 
 
 
@@ -108,6 +110,13 @@ export function addComment(comment) {
     }
 }
 
+export function addPost(post) {
+    return {
+      type: 'ADD_POST',
+      post
+    }
+}
+
 export function updateComment(commentId, body) {
     return {
       type: 'UPDATE_COMMENT',
@@ -119,6 +128,13 @@ export function updateComment(commentId, body) {
 export function deleteComment(commentId) {
     return {
       type: 'DELETE_COMMENT',
+      commentId
+    }
+}
+
+export function deletePost(commentId) {
+    return {
+      type: 'DELETE_POST',
       commentId
     }
 }
@@ -274,4 +290,41 @@ export function deleteExistingComment(commentId) {
         })
         .then(() => dispatch(deleteComment(commentId)))
     };
+}
+
+export function deleteExistingPost(postId) {
+    return (dispatch) => {
+        fetch(`${api}/posts/${postId}`, {
+          headers,
+          method: 'DELETE',
+        })
+        .then(() => dispatch(deletePost(postId)))
+    };
+}
+
+export function addNewPost(id, title, body, author, category) {
+    console.log(author)
+    return (dispatch) => {
+        fetch(`${api}/posts`, {
+          headers,
+          method: 'POST',
+          body: JSON.stringify({ 
+            id: id.toString(),
+            timestamp: Date.now(),
+            title: title,
+            body: body,
+            author: author,
+            category: category
+         })
+        })
+        .then(() => dispatch(addPost([{
+            id: id.toString(),
+            timestamp: Date.now(),
+            title: title,
+            body: body,
+            author: author,
+            category: category
+        }]
+        )))
+    }
 }

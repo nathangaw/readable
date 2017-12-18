@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 class Header extends Component {
 
@@ -6,7 +7,7 @@ class Header extends Component {
 
     return (
       <div>
-        <h1 className="view-title">Readable</h1>
+        <Link to="/"><h1 className="view-title">Readable</h1></Link>
 
       </div>
 
