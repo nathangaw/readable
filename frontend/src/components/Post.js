@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { changePostScore } from '../actions/index'
+import { changePostScore, updateExistingPost } from '../actions/index'
 import { itemsFetchSinglePost} from '../actions/index'
 import { deleteExistingPost } from '../actions/index'
 import moment from "moment"
@@ -18,29 +18,44 @@ class Post extends Component {
     setTimeout(function() {
       this.props.getPost(this.props.activePostId);
     }.bind(this), 5)
-    
   }
 
   state = {
-    editPostModalOpen: false
+    inEditMode: false,
+    titleInput: "",
+    bodyInput: ""
   }
 
-
-  openEditPostModal = () => {
+  enterEditMode = () => {
     this.setState(() => ({
-      editPostModalOpen: true
+      inEditMode: true,
+      titleInput: this.props.activePost.title,
+      bodyInput: this.props.activePost.body
     })
     )
   }
 
-  closeEditPostModal = () => {
+  exitEditMode = () => {
     this.setState(() => ({
-      editPostModalOpen: false,
-      // inCommentEditMode: false,
-      // commentInput: "",
-      // nameInput: ""
+      inEditMode: false,
+      titleInput: "",
+      bodyInput: ""
     })
     )
+  }
+
+  titleInput = (event) => {
+    this.setState({titleInput: event.target.value})
+  }
+
+  bodyInput = (event) => {
+    this.setState({bodyInput: event.target.value})
+  }
+
+  postUpdate = (event) => {
+    this.props.updatePost(this.props.activePostId, this.state.titleInput, this.state.bodyInput);
+    event.preventDefault();
+    this.exitEditMode();
   }
 
   render() {
@@ -51,7 +66,12 @@ class Post extends Component {
       <div className="post">
         <Header />
         <Link to="/new"><button>New post</button></Link>
-        <button onClick={ () => this.openEditPostModal() }>Edit post</button>
+
+        {(this.state.inEditMode == false)
+
+        ?
+        <div>
+        <button onClick={ () => this.enterEditMode() }>Edit post</button>
         <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
         <h1>{this.props.activePost.title}</h1>
         <h2>{this.props.url}</h2>
@@ -60,18 +80,27 @@ class Post extends Component {
         <p>By {this.props.activePost.author}</p>
         <p>{ moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</p>
         <p>{this.props.activePost.body}</p>
+        
 
         <Comments />
-
-
-        <Modal
-          isOpen={this.state.editPostModalOpen}
-          contentLabel="EditPostModal"
-        >
-        <button onClick={ () => this.closeEditPostModal()}>Close Modal</button>
-        <NewPost inEditMode="true" editTitle={this.props.activePost.title} editBody={this.props.activePost.body} />
-
-        </Modal>
+        </div>
+        :
+        <div>
+          {/* Edit mode */}
+          <button type="button" onClick={ () => this.exitEditMode() }>Stop editing</button>
+          <form onSubmit={this.postUpdate}>
+              <label>
+                Title:
+                <input type="text" value={this.state.titleInput} onChange={this.titleInput}></input>
+              </label>
+              <label>
+                Post:
+                <input type="text" placeholder="Your post" value={this.state.bodyInput} onChange={this.bodyInput}></input>
+              </label>
+              <input type="submit" value="Save changes" />
+          </form>
+        </div>
+        }
 
       </div>
 
@@ -92,7 +121,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     changePostScore: (direction, id) => dispatch(changePostScore(direction, id)),
     getPost: (id) => dispatch(itemsFetchSinglePost(id)),
-    deletePost: (id) => dispatch(deleteExistingPost(id))
+    deletePost: (id) => dispatch(deleteExistingPost(id)),
+    updatePost: (id, title, body) => dispatch(updateExistingPost(id, title, body))
   };
 };
 

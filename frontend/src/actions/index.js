@@ -15,6 +15,7 @@ export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const SINGLE_POST_FETCH_DATA_SUCCESS = 'SINGLE_POST_FETCH_DATA_SUCCESS'
 export const DELETE_POST = 'DELETE_POST'
 export const ADD_POST = 'ADD_POST'
+export const UPDATE_POST = 'UPDATE_POST'
 
 
 export function itemsHasErrored(bool) {
@@ -135,6 +136,15 @@ export function deletePost(commentId) {
     return {
       type: 'DELETE_POST',
       commentId
+    }
+}
+
+export function updatePost(id, title, body) {
+    return {
+      type: 'UPDATE_POST',
+      id,
+      title,
+      body
     }
 }
 
@@ -326,5 +336,20 @@ export function addNewPost(id, title, body, author, category) {
             category: category
         }]
         )))
+    }
+}
+
+export function updateExistingPost(id, title, body) {
+    return (dispatch) => {
+        fetch(`${api}/posts/${id}`, {
+          headers,
+          method: 'PUT',
+          body: JSON.stringify({ 
+            timestamp: Date.now(),
+            title: title,
+            body: body
+         })
+        })
+        .then(() => dispatch(updatePost(id, title, body)))
     }
 }

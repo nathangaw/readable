@@ -107,7 +107,10 @@ export function activePost(state = {}, action) {
 
         case 'ADD_POST':
             return action.post;
-            // TODO: redirect to newly created post
+
+        case 'UPDATE_POST':
+            // return state, updating title and body properties
+            return { ...state, title: action.title, body: action.body}
 
         default:
             return state;
