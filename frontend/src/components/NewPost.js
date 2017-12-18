@@ -9,7 +9,9 @@ class NewPost extends Component {
     titleInput: "",
     bodyInput: "",
     authorInput: "",
-    categoryInput: this.props.categories[0].name
+    categoryInput: this.props.categories[0].name,
+    postSaved: false,
+    newPostId: ""
   }
 
   titleInput = (event) => {
@@ -28,9 +30,19 @@ class NewPost extends Component {
     this.setState({categoryInput: event.target.value})
   }
 
-  postSubmit = (event) => {    
-    this.props.addPost(Math.floor(Math.random() * 1000000000), this.state.titleInput, this.state.bodyInput, this.state.authorInput, this.state.categoryInput)
-    event.preventDefault();
+  postSubmit = (event) => { 
+    // create ID for new post   
+    let newPostId = Math.floor(Math.random() * 1000000000)
+
+    // add post ID to component state for later reference in UI
+    this.setState({newPostId: newPostId})
+
+    // update store and server with new post
+    this.props.addPost(newPostId, this.state.titleInput, this.state.bodyInput, this.state.authorInput, this.state.categoryInput)
+
+    this.setState({postSaved: true})
+
+    event.preventDefault()
   }
 
   render() {
@@ -65,6 +77,15 @@ class NewPost extends Component {
               </label>
               <input type="submit" value="Submit" />
           </form>
+
+          { (this.state.postSaved == true)
+          ?
+            <div>
+            <p>Your post has been saved</p>
+            <Link to={"/post/" + this.state.newPostId}>View post</Link>
+            </div>
+          : <p></p>
+          }
       
 
 
@@ -90,9 +111,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    
     addPost: (id, title, body, author, category) => dispatch(addNewPost(id, title, body, author, category))
-    
   };
 };
 

@@ -17,7 +17,6 @@ export const DELETE_POST = 'DELETE_POST'
 export const ADD_POST = 'ADD_POST'
 
 
-
 export function itemsHasErrored(bool) {
     return {
         type: 'ITEMS_HAS_ERRORED',
@@ -138,6 +137,7 @@ export function deletePost(commentId) {
       commentId
     }
 }
+
 
 
 /* thunk function */
