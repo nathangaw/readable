@@ -255,8 +255,6 @@ export function addNewComment(commentId, body, author, parentId) {
 }
 
 export function updateExistingComment(commentId, body) {
-    console.log(commentId)
-    console.log(body)
     return (dispatch) => {
         fetch(`${api}/comments/${commentId}`, {
           headers,
@@ -302,7 +300,6 @@ export function deleteExistingPost(postId) {
 }
 
 export function addNewPost(id, title, body, author, category) {
-    console.log(author)
     return (dispatch) => {
         fetch(`${api}/posts`, {
           headers,

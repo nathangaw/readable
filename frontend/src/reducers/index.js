@@ -74,7 +74,6 @@ export function filteredPosts(state = false, action) {
 export function activePost(state = {}, action) {
     switch (action.type) {
         case 'SINGLE_POST_FETCH_DATA_SUCCESS':
-            console.log(action.item)
             return action.item;
 
         case 'UPDATE_POST_SCORE':

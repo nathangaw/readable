@@ -16,6 +16,10 @@ class Comments extends Component {
         }.bind(this), 5)
         
       }
+
+      componentWillMount() {
+        Modal.setAppElement('body');
+      }
     
       state = {
         commentModalOpen: false,
