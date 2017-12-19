@@ -20,11 +20,11 @@
 }
 
 .category-list {
-  flex-basis: 50%;
+  flex-basis: 30%;
 }
 
 .post-list {
-  flex-basis: 50%;
+  flex-basis: 70%;
 }
 
 ul {

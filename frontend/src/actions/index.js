@@ -16,6 +16,7 @@ export const SINGLE_POST_FETCH_DATA_SUCCESS = 'SINGLE_POST_FETCH_DATA_SUCCESS'
 export const DELETE_POST = 'DELETE_POST'
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_POST = 'UPDATE_POST'
+export const UPDATE_MAIN_POST_SCORE = 'UPDATE_MAIN_POST_SCORE'
 
 
 export function itemsHasErrored(bool) {
@@ -85,6 +86,14 @@ export function updatePostScore(direction, id) {
     id
   }
 }
+
+export function updateMainPostScore(direction, id) {
+    return {
+      type: 'UPDATE_MAIN_POST_SCORE',
+      direction,
+      id
+    }
+  }
 
 export function updateCommentScore(direction, id) {
     return {
@@ -224,6 +233,7 @@ export function changePostScore(direction, id) {
           body: JSON.stringify({ option: direction })
         })
         .then(() => dispatch(updatePostScore(direction, id)))
+        .then(() => dispatch(updateMainPostScore(direction, id)))
     };
 }
 

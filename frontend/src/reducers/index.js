@@ -55,6 +55,18 @@ export function posts(state = [], action) {
                 return parseFloat(a.timestamp) - parseFloat(b.timestamp);
               });
             }
+        case 'UPDATE_MAIN_POST_SCORE':
+        return state.map(post => {
+            if (post.id === action.id) {
+                if (action.direction === "upVote") {
+                    post.voteScore += 1
+                }
+                if (action.direction === "downVote") {
+                    post.voteScore -= 1
+                }
+            }
+            return post
+        })
 
         default:
             return state;
