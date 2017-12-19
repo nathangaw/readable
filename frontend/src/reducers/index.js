@@ -135,7 +135,7 @@ export function activeComments(state = [], action) {
             })
 
         case 'DELETE_COMMENT':
-            return state.filter(comment => comment.id != action.commentId)
+            return state.filter(comment => comment.id !== action.commentId)
 
         default:
             return state;

@@ -71,15 +71,6 @@ export function filterPosts(category) {
   };
 }
 
-/*
-export function setActivePost(post) {
-  return {
-    type: 'SET_ACTIVE_POST',
-    post
-  }
-}
-*/
-
 export function commentsFetchDataSuccess(items) {
   return {
     type: 'COMMENTS_FETCH_DATA_SUCCESS',
@@ -148,9 +139,7 @@ export function updatePost(id, title, body) {
     }
 }
 
-
-
-/* thunk function */
+/* thunk functions */
 const api = 'http://localhost:3001'
 
 const headers = {

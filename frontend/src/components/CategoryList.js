@@ -24,10 +24,10 @@ class CategoryList extends Component {
 
       <div className="category-list">
         <h2>Categories</h2>
-        { (this.props.filteredPostsList != false)
+        { (this.props.filteredPostsList !== false)
           ? <div>
               <button className="filter-button" onClick={ () => this.props.filteredPosts(false) }>Show all categories</button>
-              {this.props.categories.filter( category => category.name == this.props.filteredPostsList).map( category => (
+              {this.props.categories.filter( category => category.name === this.props.filteredPostsList).map( category => (
                 <li onClick={ () => this.props.filteredPosts(category.name) } key={category.name}>{category.name}</li>
               ))}
             </div>

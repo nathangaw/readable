@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { itemsFetchPosts } from '../actions/index'
 import { orderByVoteScore } from '../actions/index'
-import { setActivePost } from '../actions/index'
 import { orderByDate } from '../actions/index'
 import moment from "moment"
 import { Link } from 'react-router-dom'

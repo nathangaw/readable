@@ -5,9 +5,7 @@ import { addNewComment } from '../actions/index'
 import { changeCommentScore } from '../actions/index'
 import { updateExistingComment } from '../actions/index'
 import { deleteExistingComment } from '../actions/index'
-import moment from "moment"
 import Modal from 'react-modal'
-import { Link } from 'react-router-dom'
 
 class Comments extends Component {
     

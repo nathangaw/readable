@@ -4,10 +4,8 @@ import { changePostScore, updateExistingPost } from '../actions/index'
 import { itemsFetchSinglePost} from '../actions/index'
 import { deleteExistingPost } from '../actions/index'
 import moment from "moment"
-import Modal from 'react-modal'
 import { Link } from 'react-router-dom'
 import Header from './Header'
-import NewPost from './NewPost'
 import Comments from './Comments'
 import { setTimeout } from 'timers';
 import '../App.css'
@@ -68,7 +66,7 @@ class Post extends Component {
       <div className="post">
         <Header />
 
-        {(this.state.inEditMode == false)
+        {(this.state.inEditMode === false)
 
         ?
         <div>

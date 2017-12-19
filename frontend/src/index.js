@@ -4,7 +4,6 @@ import './index.css';
 import App from './App';
 import Post from './components/Post'
 import NewPost from './components/NewPost'
-import CategoryList from './components/CategoryList';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose } from 'redux'
 import { Provider } from 'react-redux'
@@ -12,8 +11,7 @@ import thunk from 'redux-thunk'
 import rootReducer from './reducers/index'
 import createHistory from 'history/createBrowserHistory'
 import { Route } from 'react-router'
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
-import persistState from 'redux-localstorage'
+import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 
 const history = createHistory()
 

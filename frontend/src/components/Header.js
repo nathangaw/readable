@@ -8,7 +8,7 @@ class Header extends Component {
 
     return (
       <div>
-        <Link to="/"><img className="logo" src={Logo}/></Link>
+        <Link to="/"><img alt="Readable logo" className="logo" src={Logo}/></Link>
 
       </div>
 

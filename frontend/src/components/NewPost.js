@@ -79,7 +79,7 @@ class NewPost extends Component {
               <input type="submit" value="Submit" />
           </form>
 
-          { (this.state.postSaved == true)
+          { (this.state.postSaved === true)
           ?
             <div>
             <p>Your post has been saved</p>
