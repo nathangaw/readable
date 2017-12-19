@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewPost } from '../actions/index'
 import { Link } from 'react-router-dom'
+import '../App.css'
+
 
 class NewPost extends Component {
 
@@ -49,9 +51,7 @@ class NewPost extends Component {
 
     return (
       <div>
-          <Link to="/">Home page</Link>
-
-          //TODO: add ternary to check if in edit mode and render different forms
+          <Link to="/"><button>Back to home page</button></Link>
 
           <form onSubmit={this.postSubmit}>
               <label>

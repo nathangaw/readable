@@ -81,16 +81,23 @@ class Comments extends Component {
         return (
     
           <div className="comments">
-            <h4>Comments</h4>
-            <button onClick={ () => this.openCommentModal() }>Add new comment</button>
+            <h2>Comments</h2>
             <p>Number of comments: {this.props.activeComments.length}</p>
+            <button onClick={ () => this.openCommentModal() }>Add new comment</button>
             { this.props.activeComments.map( (comment) => (
-              <div key={comment.id}>
-                <p>{comment.author}{comment.body}{comment.voteScore}</p>
-                <button onClick={ () => (this.props.changeCommentScore('upVote', comment.id)) }>Vote up</button>
-                <button onClick={ () => (this.props.changeCommentScore('downVote', comment.id)) }>Vote down</button>
-                <button onClick={ () => this.enterCommentEdit(comment.id, comment.body, comment.author)}>Edit</button>
-                <button onClick={ () => this.props.deleteComment(comment.id)}>Delete</button>
+              <div key={comment.id} className="comment">
+                <p>{comment.body}</p>
+                <p>Posted by: {comment.author} | VoteScore: {comment.voteScore}</p>
+                <div className="comment-vote-buttons">
+                    <button className="comment-button" onClick={ () => (this.props.changeCommentScore('upVote', comment.id)) }>Vote up</button>
+                    <button className="comment-button" onClick={ () => (this.props.changeCommentScore('downVote', comment.id)) }>Vote down</button>
+                </div>
+                <div className="comment-edit-buttons">
+                    <button className="comment-button" onClick={ () => this.enterCommentEdit(comment.id, comment.body, comment.author)}>Edit</button>
+                    <button className="comment-button" onClick={ () => this.props.deleteComment(comment.id)}>Delete</button>
+                    
+                </div>
+                <hr/>
               </div>
             ) ) }
     

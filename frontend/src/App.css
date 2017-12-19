@@ -2,7 +2,18 @@
   text-align: center;
 }
 
-.home-wrapper {
+.intro-text {
+  text-align: center;
+}
+
+#root {
+  max-width: 1000px;
+  margin: auto;
+  padding: 0px 10px 0px 10px;
+  text-align: center;
+}
+
+.lists {
   display: flex;
   justify-content: center;
   text-align: center;
@@ -23,4 +34,76 @@ ul {
 li {
   list-style: none;
 
+}
+
+.postlist-items {
+  margin-bottom: 10px;
+}
+
+.postlist-title {
+
+}
+
+button {
+ background-color: purple;
+ color: white;
+ border-radius: 5px;
+ font-size: 14px;
+ padding: 5px 5px 5px 5px;
+ cursor: pointer;
+}
+
+button:hover {
+  background-color: grey;
+  color: purple;
+}
+
+.new-post-button {
+  margin: auto;
+  display: block;
+}
+
+.filter-button {
+  margin-bottom: 10px;
+}
+
+.category-list li {
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.comments {
+  margin-top: 50px;
+}
+
+.comment {
+  max-width: 300px;
+  margin: auto;
+}
+
+.comment-vote-buttons {
+  display: flex;
+}
+
+.comment-vote-buttons button {
+  flex-basis: 50%;
+}
+
+.comment-edit-buttons {
+  display: flex;
+}
+
+.comment-edit-buttons button {
+  flex-basis: 50%;
+}
+
+.comment-button {
+  color: black;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: 14px;
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+  margin: 2px 2px 2px 2px;
 }

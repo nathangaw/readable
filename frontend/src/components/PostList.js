@@ -27,15 +27,21 @@ class PostList extends Component {
     return (
       <div className="post-list">
         <h2>Posts</h2>
-        <p onClick={ () => this.props.votescoreSort('descend') }>Sort by descending votescore</p>
-        <p onClick={ () => this.props.votescoreSort('ascend') }>Sort by ascending votescore</p>
-        <p onClick={ () => this.props.dateSort('descend') }>Sort by descending date</p>
-        <p onClick={ () => this.props.dateSort('ascend') }>Sort by ascending date</p>
+        <div className="post-list-buttons">
+          <div className="post-vs-buttons">
+            <button onClick={ () => this.props.votescoreSort('descend') }>Sort by descending votescore</button>
+            <button onClick={ () => this.props.votescoreSort('ascend') }>Sort by ascending votescore</button>
+          </div>
+          <div className="post-date-buttons">
+            <button onClick={ () => this.props.dateSort('descend') }>Sort by descending date</button>
+            <button onClick={ () => this.props.dateSort('ascend') }>Sort by ascending date</button>
+          </div>
+        </div>
         <ul>
           { (this.props.filteredPosts.length)
-            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} onClick={() => this.props.setActivePost(post.id) } key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
+            ? this.props.posts.filter( post => post.category === this.props.filteredPosts ).map( post => (<Link to={"/post/" + post.id} onClick={() => this.props.setActivePost(post.id) } key={post.id}><li className="postlist-items"><span className="postlist-title"><strong>{post.title}</strong> </span><br/><span className="postlist-secondrow"> { moment(post.timestamp).format('MMMM Do YYYY') } | VoteScore:{post.voteScore} </span><br/><span className="postlist-comments"> Comments: {post.commentCount}</span></li></Link>))
             : this.props.posts.map( post => (
-            <Link to={"/post/" + post.id} key={post.id}><li>{post.title} | { moment(post.timestamp).format('MMMM Do YYYY') } | {post.voteScore}</li></Link>))
+            <Link to={"/post/" + post.id} key={post.id}><li className="postlist-items"><span className="postlist-title"> <strong>{post.title}</strong> </span><br/><span className="postlist-secondrow"> { moment(post.timestamp).format('MMMM Do YYYY') } | VoteScore: {post.voteScore}</span><br/><span className="postlist-comments"> Comments: {post.commentCount}</span></li></Link>))
           }
 
         </ul>
@@ -58,8 +64,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
       fetchData: () => dispatch(itemsFetchPosts()),
       votescoreSort: (direction) => dispatch(orderByVoteScore(direction)),
-      dateSort: (direction) => dispatch(orderByDate(direction)),
-     // setActivePost: (post) => dispatch(setActivePost(post))
+      dateSort: (direction) => dispatch(orderByDate(direction))
 
   };
 };

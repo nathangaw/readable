@@ -10,6 +10,8 @@ import Header from './Header'
 import NewPost from './NewPost'
 import Comments from './Comments'
 import { setTimeout } from 'timers';
+import '../App.css'
+
 
 class Post extends Component {
 
@@ -74,11 +76,10 @@ class Post extends Component {
         <button onClick={ () => this.enterEditMode() }>Edit post</button>
         <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
         <h1>{this.props.activePost.title}</h1>
-        <h2>{this.props.url}</h2>
+        <h4>By {this.props.activePost.author} | { moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</h4>
         <p>Votescore: {this.props.activePost.voteScore}</p>
         <button onClick={ () => (this.props.changePostScore('upVote', this.props.activePostId)) }>Increase score</button><button onClick={ () => (this.props.changePostScore('downVote', this.props.activePostId)) }>Decrease score</button>
-        <p>By {this.props.activePost.author}</p>
-        <p>{ moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</p>
+        
         <p>{this.props.activePost.body}</p>
         
 

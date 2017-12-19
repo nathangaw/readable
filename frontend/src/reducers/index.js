@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux'
 import { routerReducer } from 'react-router-redux'
-/* import { ITEMS_HAS_ERRORED, ITEMS_IS_LOADING, ITEMS_FETCH_DATA_SUCCESS } from '../actions/index'; */
 
 export function itemsHasErrored(state = false, action) {
     switch (action.type) {
@@ -56,19 +55,6 @@ export function posts(state = [], action) {
                 return parseFloat(a.timestamp) - parseFloat(b.timestamp);
               });
             }
-        /*case 'UPDATE_POST_SCORE':
-          return state.map(post => {
-            if (post.id === action.id) {
-              if (action.direction === "upVote") {
-                post.voteScore += 1
-              }
-              if (action.direction === "downVote") {
-                post.voteScore -= 1
-              }
-            }
-          return post
-          })*/
-
 
         default:
             return state;
@@ -109,7 +95,6 @@ export function activePost(state = {}, action) {
             return action.post;
 
         case 'UPDATE_POST':
-            // return state, updating title and body properties
             return { ...state, title: action.title, body: action.body}
 
         default:
@@ -151,8 +136,6 @@ export function activeComments(state = [], action) {
 
         case 'DELETE_COMMENT':
             return state.filter(comment => comment.id != action.commentId)
-            
-              
 
         default:
             return state;
