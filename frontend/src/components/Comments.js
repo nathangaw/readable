@@ -106,8 +106,8 @@ class Comments extends Component {
               isOpen={this.state.commentModalOpen}
               contentLabel="Modal"
             >
-              <button onClick={ () => this.closeCommentModal()}>Close Modal</button>
-              <h1>Add a comment</h1>
+              <button onClick={ () => this.closeCommentModal()}>Close window</button>
+              
     
               
     
@@ -115,25 +115,27 @@ class Comments extends Component {
                 { (this.state.inCommentEditMode === false)
                 ?
                 <div>
+                  <h1>Add a comment</h1>
                   <form onSubmit={this.commentSubmit}>
                   <label>
                     Your comment:
-                    <input type="text" value={this.state.commentInput} onChange={this.commentInput}></input>
-                  </label>
+                    <input type="text" placeholder="Your comment" value={this.state.commentInput} onChange={this.commentInput}></input>
+                  </label><br/>
                   <label>
                     Your name:
                     <input type="text" placeholder="Your name" value={this.state.nameInput} onChange={this.nameInput}></input>
-                  </label>
+                  </label><br/>
                   <input type="submit" value="Submit" />
               </form>
                 </div>
                 :
                 <div>
+                  <h1>Edit your comment</h1>
                   <form onSubmit={this.commentUpdate}>
                   <label>
                     Your comment:
                     <input type="text" value={this.state.commentInput} onChange={this.commentInput}></input>
-                  </label>
+                  </label><br/>
                   <input type="submit" value="Submit" />
               </form>
                 </div>

@@ -107,3 +107,32 @@ button:hover {
   cursor: pointer;
   margin: 2px 2px 2px 2px;
 }
+
+.logo {
+  margin: 20px 0 20px 0;
+}
+
+input[type="submit"] {
+  background-color: purple;
+  color: white;
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+
+input[type="text"] {
+  width: 200px;
+  height: 25px;
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+select {
+  margin-bottom: 20px;
+  margin-left: 10px;
+}
+
+.stop-editing-button {
+  margin-bottom: 20px;
+}

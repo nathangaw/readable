@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { addNewPost } from '../actions/index'
 import { Link } from 'react-router-dom'
 import '../App.css'
+import Header from './Header'
 
 
 class NewPost extends Component {
@@ -51,30 +52,30 @@ class NewPost extends Component {
 
     return (
       <div>
-          <Link to="/"><button>Back to home page</button></Link>
-
+          <Header />
+          <p>Create a new post.</p>
           <form onSubmit={this.postSubmit}>
               <label>
-                Title:
-                <input type="text" value={this.state.titleInput} onChange={this.titleInput}></input>
-              </label>
+                Title: 
+                <input className="new-title" placeholder="Post title" type="text" value={this.state.titleInput} onChange={this.titleInput}></input>
+              </label><br/>
               <label>
-                Post:
+                Post: 
                 <input type="text" placeholder="Your post" value={this.state.bodyInput} onChange={this.bodyInput}></input>
-              </label>
+              </label><br/>
               <label>
-              Author:
+              Author: 
               <input type="text" placeholder="Your name" value={this.state.authorInput} onChange={this.authorInput}></input>
-              </label>
+              </label><br/>
               <label>
-              Category:
+              Category: 
               <select value={this.state.categoryInput} onChange={this.categoryInput}>
                 { this.props.categories.map( category => <option key={category.name} value={category.name}>{category.name}</option>
                 )}
               
               
               </select>
-              </label>
+              </label><br/>
               <input type="submit" value="Submit" />
           </form>
 

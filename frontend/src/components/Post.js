@@ -67,12 +67,12 @@ class Post extends Component {
 
       <div className="post">
         <Header />
-        <Link to="/new"><button>New post</button></Link>
 
         {(this.state.inEditMode == false)
 
         ?
         <div>
+        <Link to="/new"><button>New post</button></Link>
         <button onClick={ () => this.enterEditMode() }>Edit post</button>
         <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
         <h1>{this.props.activePost.title}</h1>
@@ -88,16 +88,16 @@ class Post extends Component {
         :
         <div>
           {/* Edit mode */}
-          <button type="button" onClick={ () => this.exitEditMode() }>Stop editing</button>
+          <button className="stop-editing-button" type="button" onClick={ () => this.exitEditMode() }>Stop editing</button>
           <form onSubmit={this.postUpdate}>
               <label>
                 Title:
                 <input type="text" value={this.state.titleInput} onChange={this.titleInput}></input>
-              </label>
+              </label><br/>
               <label>
                 Post:
                 <input type="text" placeholder="Your post" value={this.state.bodyInput} onChange={this.bodyInput}></input>
-              </label>
+              </label><br/>
               <input type="submit" value="Save changes" />
           </form>
         </div>

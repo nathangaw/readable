@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import Logo from '../Readable.png'
 
 class Header extends Component {
 
@@ -7,7 +8,7 @@ class Header extends Component {
 
     return (
       <div>
-        <Link to="/"><h1 className="view-title">Readable</h1></Link>
+        <Link to="/"><img className="logo" src={Logo}/></Link>
 
       </div>
 
