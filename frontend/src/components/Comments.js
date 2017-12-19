@@ -115,16 +115,16 @@ class Comments extends Component {
                 <div>
                   <h1>Add a comment</h1>
                   <form onSubmit={this.commentSubmit}>
-                  <label>
-                    Your comment:
-                    <input type="text" placeholder="Your comment" value={this.state.commentInput} onChange={this.commentInput}></input>
-                  </label><br/>
-                  <label>
-                    Your name:
-                    <input type="text" placeholder="Your name" value={this.state.nameInput} onChange={this.nameInput}></input>
-                  </label><br/>
-                  <input type="submit" value="Submit" />
-              </form>
+                    <label>
+                        Your comment:
+                        <input type="text" placeholder="Your comment" value={this.state.commentInput} onChange={this.commentInput}></input>
+                    </label><br/>
+                    <label>
+                        Your name:
+                        <input type="text" placeholder="Your name" value={this.state.nameInput} onChange={this.nameInput}></input>
+                    </label><br/>
+                    <input type="submit" value="Submit" />
+                   </form>
                 </div>
                 :
                 <div>
