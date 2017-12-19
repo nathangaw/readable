@@ -23,18 +23,7 @@ const defaultData = {
     category: 'react',
     voteScore: 2,
     deleted: false,
-    commentCount: 2
-  },
-  "aascaciyjabvozdd253": {
-    id: 'aascaciyjabvozdd253',
-    timestamp: 1466166872624,
-    title: 'Udacity is the best place to learn React',
-    body: 'Everyone says so after all.',
-    author: 'thingtwo',
-    category: 'react',
-    voteScore: 16,
-    deleted: false,
-    commentCount: 2
+    commentCount: 0
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
