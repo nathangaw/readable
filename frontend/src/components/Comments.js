@@ -156,7 +156,7 @@ class Comments extends Component {
     const mapStateToProps = (state) => {
       return {
         // need url to populate page if refreshed or accessed directly
-        activePostId: state.router.location.pathname.slice(6),
+        activePostId: state.router.location.pathname.substring(state.router.location.pathname.lastIndexOf('/')+1),
         activeComments: state.activeComments,
         activePost: state.activePost    
       };

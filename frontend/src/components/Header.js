@@ -8,7 +8,7 @@ class Header extends Component {
 
     return (
       <div>
-        <Link to="/"><img alt="Readable logo" className="logo" src={Logo}/></Link>
+        <Link onClick={ () => this.props.filteredPosts(false)} to="/"><img alt="Readable logo" className="logo" src={Logo}/></Link>
 
       </div>
 

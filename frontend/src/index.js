@@ -10,7 +10,7 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import rootReducer from './reducers/index'
 import createHistory from 'history/createBrowserHistory'
-import { Route } from 'react-router'
+import { Route, Switch } from 'react-router'
 import { ConnectedRouter, routerMiddleware } from 'react-router-redux'
 
 const history = createHistory()
@@ -31,9 +31,13 @@ ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
       <div>
-        <Route exact path="/" component={App}/>
-        <Route path="/post/:post" component={Post}/>
-        <Route exact path="/new" component={NewPost}/>
+        <Switch>
+          <Route exact path="/" component={App}/>
+          <Route exact path="/new-post" component={NewPost}/>
+          <Route exact path="/:category/:post" component={Post}/>
+          <Route exact path="/:category" component={App}/>
+        </Switch>
+
       </div>
     </ConnectedRouter>
   </Provider>

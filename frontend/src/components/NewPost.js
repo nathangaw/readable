@@ -83,7 +83,7 @@ class NewPost extends Component {
           ?
             <div>
             <p>Your post has been saved</p>
-            <Link to={"/post/" + this.state.newPostId}>View post</Link>
+            <Link to={this.state.categoryInput + "/" + this.state.newPostId}>View post</Link>
             </div>
           : <p></p>
           }

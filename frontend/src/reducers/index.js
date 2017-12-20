@@ -67,6 +67,8 @@ export function posts(state = [], action) {
             }
             return post
         })
+        case 'DELETE_MAIN_POST':
+            return state.filter( post => post.id !== action.postId)
 
         default:
             return state;

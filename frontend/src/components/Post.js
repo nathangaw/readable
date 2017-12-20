@@ -60,7 +60,6 @@ class Post extends Component {
 
   render() {
 
-
     return (
 
       <div className="post">
@@ -70,7 +69,7 @@ class Post extends Component {
 
         ?
         <div>
-        <Link to="/new"><button>New post</button></Link>
+        <Link to="/new/post/create"><button>New post</button></Link>
         <button onClick={ () => this.enterEditMode() }>Edit post</button>
         <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
         <h1>{this.props.activePost.title}</h1>
@@ -111,7 +110,7 @@ class Post extends Component {
 const mapStateToProps = (state) => {
   return {
     // need url to populate page if refreshed or accessed directly
-    activePostId: state.router.location.pathname.slice(6),
+    activePostId: state.router.location.pathname.substring(state.router.location.pathname.lastIndexOf('/')+1),
     activePost: state.activePost    
   };
 };

@@ -13,8 +13,7 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <Link to="/new"><button className="new-post-button">Add new post</button></Link>
-        <p className="intro-text">Click on a category to filter the list of posts.</p>
+        <Link to="/new-post"><button className="new-post-button">Add new post</button></Link>
         <div className="lists">
           <CategoryList />
           <PostList />

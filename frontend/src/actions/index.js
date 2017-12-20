@@ -17,6 +17,7 @@ export const DELETE_POST = 'DELETE_POST'
 export const ADD_POST = 'ADD_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_MAIN_POST_SCORE = 'UPDATE_MAIN_POST_SCORE'
+export const DELETE_MAIN_POST = 'DELETE_MAIN_POST'
 
 
 export function itemsHasErrored(bool) {
@@ -136,6 +137,13 @@ export function deletePost(commentId) {
     return {
       type: 'DELETE_POST',
       commentId
+    }
+}
+
+export function deleteMainPost(postId) {
+    return {
+      type: 'DELETE_MAIN_POST',
+      postId
     }
 }
 
@@ -306,6 +314,7 @@ export function deleteExistingPost(postId) {
           method: 'DELETE',
         })
         .then(() => dispatch(deletePost(postId)))
+        .then(() => dispatch(deleteMainPost(postId)))
     };
 }
 

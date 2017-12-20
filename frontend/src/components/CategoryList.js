@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { itemsFetchCategories } from '../actions/index'
 import { filterPosts } from '../actions/index'
+import { Link } from 'react-router-dom'
 
 class CategoryList extends Component {
 
@@ -35,7 +36,7 @@ class CategoryList extends Component {
           : <div>
               <ul className="category-list">
                 {this.props.categories.map( category => (
-                  <li onClick={ () => this.props.filteredPosts(category.name) } key={category.name}>{category.name}</li>
+                  <Link key={category.name} to={"/" + category.name}><li onClick={ () => this.props.filteredPosts(category.name) } >{category.name}</li></Link>
                 ))}
               </ul>
              </div>
