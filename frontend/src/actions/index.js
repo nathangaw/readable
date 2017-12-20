@@ -164,6 +164,13 @@ export function postEditMode(bool) {
     }
 }
 
+export function setActivePost(post) {
+    return {
+      type: 'SET_ACTIVE_POST',
+      post
+    }
+}
+
 /* thunk functions */
 const api = 'http://localhost:3001'
 

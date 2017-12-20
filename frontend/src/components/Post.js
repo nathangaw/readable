@@ -17,8 +17,12 @@ class Post extends Component {
   componentDidMount() {
     setTimeout(function() {
       this.props.getPost(this.props.activePostId);
-    }.bind(this), 5)
+    }.bind(this), 5);
+    if (this.props.inEditMode === true) {
+      this.enterEditMode();
+    }
   }
+
 
   state = {
     titleInput: "",
@@ -26,6 +30,7 @@ class Post extends Component {
   }
 
   enterEditMode = () => {
+    // need to make sure edit mode is true because this function may be called by on-page button
     this.props.editMode(true);
     this.setState(() => ({
       titleInput: this.props.activePost.title,
@@ -111,7 +116,7 @@ const mapStateToProps = (state) => {
     // need url to populate page if refreshed or accessed directly
     activePostId: state.router.location.pathname.substring(state.router.location.pathname.lastIndexOf('/')+1),
     activePost: state.activePost,
-    inEditMode: state.postEditMode    
+    inEditMode: state.postEditMode   
   };
 };
 

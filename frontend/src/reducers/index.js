@@ -87,18 +87,19 @@ export function filteredPosts(state = false, action) {
 export function postEditMode(state = false, action) {
     switch (action.type) {
         case 'POST_EDIT_MODE':
-            console.log('I am editing')
             return action.bool;
         default:
             return state;
     }
 }
 
-
 export function activePost(state = {}, action) {
     switch (action.type) {
         case 'SINGLE_POST_FETCH_DATA_SUCCESS':
             return action.item;
+
+        case 'SET_ACTIVE_POST':
+            return action.post;
 
         case 'UPDATE_POST_SCORE':
 
