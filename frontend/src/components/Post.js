@@ -73,7 +73,7 @@ class Post extends Component {
 
         ?
         <div>
-        <Link to="/new/post/create"><button>New post</button></Link>
+        <Link to="/new-post"><button>New post</button></Link>
         <button onClick={ () => this.enterEditMode() }>Edit post</button>
         <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
         <h1>{this.props.activePost.title}</h1>
