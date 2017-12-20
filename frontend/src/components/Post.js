@@ -9,7 +9,7 @@ import Header from './Header'
 import Comments from './Comments'
 import { setTimeout } from 'timers';
 import '../App.css'
-
+import { postEditMode } from '../actions/index'
 
 class Post extends Component {
 
@@ -21,14 +21,13 @@ class Post extends Component {
   }
 
   state = {
-    inEditMode: false,
     titleInput: "",
     bodyInput: ""
   }
 
   enterEditMode = () => {
+    this.props.editMode(true);
     this.setState(() => ({
-      inEditMode: true,
       titleInput: this.props.activePost.title,
       bodyInput: this.props.activePost.body
     })
@@ -36,8 +35,8 @@ class Post extends Component {
   }
 
   exitEditMode = () => {
+    this.props.editMode(false);
     this.setState(() => ({
-      inEditMode: false,
       titleInput: "",
       bodyInput: ""
     })
@@ -65,7 +64,7 @@ class Post extends Component {
       <div className="post">
         <Header />
 
-        {(this.state.inEditMode === false)
+        {(this.props.inEditMode === false)
 
         ?
         <div>
@@ -111,7 +110,8 @@ const mapStateToProps = (state) => {
   return {
     // need url to populate page if refreshed or accessed directly
     activePostId: state.router.location.pathname.substring(state.router.location.pathname.lastIndexOf('/')+1),
-    activePost: state.activePost    
+    activePost: state.activePost,
+    inEditMode: state.postEditMode    
   };
 };
 
@@ -120,7 +120,8 @@ const mapDispatchToProps = (dispatch) => {
     changePostScore: (direction, id) => dispatch(changePostScore(direction, id)),
     getPost: (id) => dispatch(itemsFetchSinglePost(id)),
     deletePost: (id) => dispatch(deleteExistingPost(id)),
-    updatePost: (id, title, body) => dispatch(updateExistingPost(id, title, body))
+    updatePost: (id, title, body) => dispatch(updateExistingPost(id, title, body)),
+    editMode: (bool) => dispatch(postEditMode(bool))
   };
 };
 

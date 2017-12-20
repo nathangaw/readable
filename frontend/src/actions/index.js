@@ -18,6 +18,7 @@ export const ADD_POST = 'ADD_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_MAIN_POST_SCORE = 'UPDATE_MAIN_POST_SCORE'
 export const DELETE_MAIN_POST = 'DELETE_MAIN_POST'
+export const POST_EDIT_MODE = 'POST_EDIT_MODE'
 
 
 export function itemsHasErrored(bool) {
@@ -153,6 +154,13 @@ export function updatePost(id, title, body) {
       id,
       title,
       body
+    }
+}
+
+export function postEditMode(bool) {
+    return {
+      type: 'POST_EDIT_MODE',
+      bool
     }
 }
 

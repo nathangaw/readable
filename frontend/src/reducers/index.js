@@ -84,6 +84,16 @@ export function filteredPosts(state = false, action) {
     }
 }
 
+export function postEditMode(state = false, action) {
+    switch (action.type) {
+        case 'POST_EDIT_MODE':
+            console.log('I am editing')
+            return action.bool;
+        default:
+            return state;
+    }
+}
+
 
 export function activePost(state = {}, action) {
     switch (action.type) {
@@ -164,5 +174,6 @@ export default combineReducers({
   itemsIsLoading,
   filteredPosts,
   activeComments,
+  postEditMode,
   router: routerReducer
 });
