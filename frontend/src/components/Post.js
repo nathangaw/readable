@@ -10,6 +10,8 @@ import Comments from './Comments'
 import { setTimeout } from 'timers';
 import '../App.css'
 import { postEditMode } from '../actions/index'
+import { itemsHasErrored } from '../actions/index'
+import { resetError } from '../actions/index'
 
 class Post extends Component {
 
@@ -67,30 +69,44 @@ class Post extends Component {
     return (
 
       <div className="post">
-        <Header />
 
-        {(this.props.inEditMode === false)
-
+        {(this.props.itemsHasErrored === true)
         ?
         <div>
-        <Link to="/new-post"><button>New post</button></Link>
-        <button onClick={ () => this.enterEditMode() }>Edit post</button>
-        <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
-        <h1>{this.props.activePost.title}</h1>
-        <h4>By {this.props.activePost.author} | { moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</h4>
-        <p>Votescore: {this.props.activePost.voteScore}</p>
-        <button onClick={ () => (this.props.changePostScore('upVote', this.props.activePostId)) }>Increase score</button><button onClick={ () => (this.props.changePostScore('downVote', this.props.activePostId)) }>Decrease score</button>
-        
-        <p>{this.props.activePost.body}</p>
-        
-
-        <Comments />
+          <h1>Uh oh, this page doesn't exist.</h1>
+          <p>Please go back to the <Link onClick={() => this.props.resetError(false)} to="/">home page</Link>.</p>
         </div>
+
         :
+
+        
         <div>
-          {/* Edit mode */}
-          <button className="stop-editing-button" type="button" onClick={ () => this.exitEditMode() }>Stop editing</button>
-          <form onSubmit={this.postUpdate}>
+          <Header />
+
+          {(this.props.inEditMode === false)
+
+          ?
+          <div>
+            <Link to="/new-post"><button>New post</button></Link>
+            <button onClick={ () => this.enterEditMode() }>Edit post</button>
+            <Link to="/"><button onClick={() => this.props.deletePost(this.props.activePostId)}>Delete post</button></Link>
+            <h1>{this.props.activePost.title}</h1>
+            <h4>By {this.props.activePost.author} | { moment(this.props.activePost.timestamp).format('MMMM Do YYYY') }</h4>
+            <p>Votescore: {this.props.activePost.voteScore}</p>
+            <button onClick={ () => (this.props.changePostScore('upVote', this.props.activePostId)) }>Increase score</button><button onClick={ () => (this.props.changePostScore('downVote', this.props.activePostId)) }>Decrease score</button>
+          
+            <p>{this.props.activePost.body}</p>
+
+            <Comments />
+
+          </div>
+
+          :
+          
+          <div>
+            {/* Edit mode */}
+            <button className="stop-editing-button" type="button" onClick={ () => this.exitEditMode() }>Stop editing</button>
+            <form onSubmit={this.postUpdate}>
               <label>
                 Title:
                 <input type="text" value={this.state.titleInput} onChange={this.titleInput}></input>
@@ -100,12 +116,16 @@ class Post extends Component {
                 <input type="text" placeholder="Your post" value={this.state.bodyInput} onChange={this.bodyInput}></input>
               </label><br/>
               <input type="submit" value="Save changes" />
-          </form>
+            </form>
+          </div>
+
+          }
         </div>
         }
+        
 
       </div>
-
+      
     )
   }
 
@@ -116,7 +136,8 @@ const mapStateToProps = (state) => {
     // need url to populate page if refreshed or accessed directly
     activePostId: state.router.location.pathname.substring(state.router.location.pathname.lastIndexOf('/')+1),
     activePost: state.activePost,
-    inEditMode: state.postEditMode   
+    inEditMode: state.postEditMode,
+    itemsHasErrored: state.itemsHasErrored  
   };
 };
 
@@ -126,7 +147,8 @@ const mapDispatchToProps = (dispatch) => {
     getPost: (id) => dispatch(itemsFetchSinglePost(id)),
     deletePost: (id) => dispatch(deleteExistingPost(id)),
     updatePost: (id, title, body) => dispatch(updateExistingPost(id, title, body)),
-    editMode: (bool) => dispatch(postEditMode(bool))
+    editMode: (bool) => dispatch(postEditMode(bool)),
+    resetError: (bool) => dispatch(resetError(bool))
   };
 };
 

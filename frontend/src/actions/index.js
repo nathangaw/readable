@@ -19,6 +19,7 @@ export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_MAIN_POST_SCORE = 'UPDATE_MAIN_POST_SCORE'
 export const DELETE_MAIN_POST = 'DELETE_MAIN_POST'
 export const POST_EDIT_MODE = 'POST_EDIT_MODE'
+export const RESET_ERROR = 'RESET_ERROR'
 
 
 export function itemsHasErrored(bool) {
@@ -168,6 +169,13 @@ export function setActivePost(post) {
     return {
       type: 'SET_ACTIVE_POST',
       post
+    }
+}
+
+export function resetError(bool) {
+    return {
+      type: 'RESET_ERROR',
+      bool
     }
 }
 
