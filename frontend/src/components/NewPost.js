@@ -51,7 +51,7 @@ class NewPost extends Component {
     event.preventDefault()
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchCategories()
   }
 
@@ -61,6 +61,12 @@ class NewPost extends Component {
     return (
       <div>
           <Header />
+
+          {(!this.props.categories.length)
+          ? <div>Loading...</div>
+          :
+          
+          <div>
           <p>Create a new post.</p>
           <form onSubmit={this.postSubmit}>
               <label>
@@ -86,6 +92,8 @@ class NewPost extends Component {
               </label><br/>
               <input type="submit" value="Submit" />
           </form>
+          </div>
+          }
 
           { (this.state.postSaved === true)
           ?
@@ -113,8 +121,9 @@ class NewPost extends Component {
 }
 
 const mapStateToProps = (state) => {
+  
   return {
-      categories: state.categories
+      categories: state.categories  
   };
 };
 
