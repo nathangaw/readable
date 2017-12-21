@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addNewPost } from '../actions/index'
+import { itemsFetchCategories } from '../actions/index'
 import { Link } from 'react-router-dom'
 import '../App.css'
 import Header from './Header'
@@ -12,7 +13,7 @@ class NewPost extends Component {
     titleInput: "",
     bodyInput: "",
     authorInput: "",
-    categoryInput: this.props.categories[0].name,
+    categoryInput: "",
     postSaved: false,
     newPostId: ""
   }
@@ -34,11 +35,13 @@ class NewPost extends Component {
   }
 
   postSubmit = (event) => { 
+    
     // create ID for new post   
     let newPostId = Math.floor(Math.random() * 1000000000)
 
     // add post ID to component state for later reference in UI
     this.setState({newPostId: newPostId})
+
 
     // update store and server with new post
     this.props.addPost(newPostId, this.state.titleInput, this.state.bodyInput, this.state.authorInput, this.state.categoryInput)
@@ -47,6 +50,11 @@ class NewPost extends Component {
 
     event.preventDefault()
   }
+
+  componentWillMount() {
+    this.props.fetchCategories()
+  }
+
 
   render() {
 
@@ -69,7 +77,7 @@ class NewPost extends Component {
               </label><br/>
               <label>
               Category: 
-              <select value={this.state.categoryInput} onChange={this.categoryInput}>
+              <select value={this.props.categories[0].name} onChange={this.categoryInput}>
                 { this.props.categories.map( category => <option key={category.name} value={category.name}>{category.name}</option>
                 )}
               
@@ -112,7 +120,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addPost: (id, title, body, author, category) => dispatch(addNewPost(id, title, body, author, category))
+    addPost: (id, title, body, author, category) => dispatch(addNewPost(id, title, body, author, category)),
+    fetchCategories: () => dispatch(itemsFetchCategories())
   };
 };
 
