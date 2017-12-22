@@ -15,7 +15,8 @@ class NewPost extends Component {
     authorInput: "",
     categoryInput: "",
     postSaved: false,
-    newPostId: ""
+    newPostId: "",
+    newCategories: []
   }
 
   titleInput = (event) => {
@@ -52,7 +53,16 @@ class NewPost extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchCategories()
+    this.props.fetchCategories();
+    setTimeout(function(){
+      this.updateCategories()
+    }.bind(this), 500);
+  }
+
+  updateCategories() {
+    let newCategories = this.props.categories
+    newCategories.unshift({name: "Please choose...", path: "Choose"});
+    this.setState({newCategories: newCategories});
   }
 
 
@@ -83,8 +93,8 @@ class NewPost extends Component {
               </label><br/>
               <label>
               Category: 
-              <select value={this.props.categories[0].name} onChange={this.categoryInput}>
-                { this.props.categories.map( category => <option key={category.name} value={category.name}>{category.name}</option>
+              <select onChange={this.categoryInput}>
+                { this.state.newCategories.map( category => <option key={category.name} value={category.name}>{category.name}</option>
                 )}
               
               

@@ -70,7 +70,7 @@ class Post extends Component {
 
       <div className="post">
 
-        {(this.props.itemsHasErrored === true)
+        {(!this.props.posts.length)
         ?
         <div>
           <h1>Uh oh, this page doesn't exist.</h1>
@@ -137,7 +137,8 @@ const mapStateToProps = (state) => {
     activePostId: state.router.location.pathname.substring(state.router.location.pathname.lastIndexOf('/')+1),
     activePost: state.activePost,
     inEditMode: state.postEditMode,
-    itemsHasErrored: state.itemsHasErrored  
+    itemsHasErrored: state.itemsHasErrored,
+    posts: state.posts  
   };
 };
 
