@@ -70,7 +70,7 @@ class Post extends Component {
 
       <div className="post">
 
-        {(!this.props.posts.length)
+        {(!this.props.activePost.title)
         ?
         <div>
           <h1>Uh oh, this page doesn't exist.</h1>
